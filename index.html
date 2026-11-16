@@ -1,0 +1,169 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>KURNIWORD RACE</title>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+<style>
+:root{--r:#e10600;--w:#fff;--k:#000;--g:#161616;--g2:#2b2b2b}
+*{box-sizing:border-box;margin:0}
+body{background:var(--k);color:var(--w);font:600 16px/1.3 system-ui,sans-serif;min-height:100vh;overflow-x:hidden;background-image:linear-gradient(115deg,transparent 62%,#e1060026 62% 64%,transparent 64%)}
+h2,.big,.hd,button,.tile,.logo{font-family:'Russo One',Impact,'Arial Black',sans-serif}
+.logo{position:relative;display:inline-block;font-size:clamp(28px,5vw,60px);font-style:italic;transform:skew(-8deg);padding-bottom:12px;text-align:center}
+.logo b{color:var(--r)}
+.logo:after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:repeating-conic-gradient(var(--w) 0 25%,var(--k) 0 50%) 0 0/16px 16px}
+button{background:var(--r);color:var(--w);border:0;border-radius:10px;padding:12px 20px;font-size:1.05em;cursor:pointer;transition:transform .1s}
+button:active{transform:scale(.95)}button.alt{background:var(--g2)}button.on,.go{background:var(--w);color:var(--k)}
+.go{font-size:1.4em;padding:16px 38px;box-shadow:0 0 0 4px var(--r)}button.sm{padding:4px 9px}
+.board{display:grid;grid-template-columns:1fr 360px;gap:24px;padding:24px;min-height:100vh}
+@media(max-width:900px){.board{grid-template-columns:1fr}}
+.main{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center}
+.side{background:var(--g);border-radius:16px;padding:14px;align-self:start}
+.row{display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;margin-top:6px;background:#0d0d0d}
+.main .row{width:min(560px,92%);background:var(--g)}
+.row.me{outline:2px solid var(--r)}.row.off{opacity:.4}.row.tA{border-left:6px solid var(--r)}.row.tB{border-left:6px solid var(--w)}
+.nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
+.av{font-style:normal;display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;font-size:22px;flex:none}
+.in{animation:pop .4s}@keyframes pop{from{transform:scale(0)}}
+em{font-style:normal;color:var(--r);font-weight:900}
+.hd{font-size:1.2em;opacity:.9}.big{font-size:clamp(70px,14vw,200px);line-height:1}.big.sm{font-size:clamp(60px,26vw,120px)}.big small{font-size:.3em}
+.big.code{letter-spacing:.12em;font-size:clamp(50px,9vw,120px);color:var(--r)}
+.qr{width:200px;height:200px;background:#fff;padding:6px;border-radius:12px}.url{opacity:.6;font-size:.85em;word-break:break-all}
+.ctl,.chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.chips .dim{opacity:.3}.chips .ok .av{outline:3px solid var(--w);animation:pop .3s}
+.tt{padding:6px 10px;border-radius:8px;text-align:center;flex:1}.tt.A{background:var(--r)}.tt.B{background:var(--w);color:#000}
+.tiles{display:flex;gap:8px;justify-content:center}
+.tile{--ts:64px;width:var(--ts);height:calc(var(--ts)*1.25);font-size:calc(var(--ts)*.62);display:grid;place-items:center;background:var(--w);color:var(--k);border-radius:8px;position:relative}
+.board .tile{--ts:clamp(44px,8vw,110px)}.ph .tile{--ts:clamp(36px,11vw,60px)}
+.tile.mod{background:var(--r);color:var(--w);animation:bob 1s infinite}.tile.slot{background:var(--k);color:var(--w);border:3px dashed var(--r)}
+.tile sub{position:absolute;top:1px;left:5px;font-size:.3em;opacity:.7;text-decoration:line-through}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.bar{height:14px;background:var(--g2);border-radius:9px;overflow:hidden;width:min(560px,100%)}.bar i{display:block;height:100%;background:var(--r)}
+.pods{display:flex;align-items:flex-end;gap:12px}.pod{display:flex;flex-direction:column;align-items:center;gap:6px}.pod .av{width:64px;height:64px;font-size:36px}
+.step{background:var(--r);width:140px;height:var(--h);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:2em;border-radius:10px 10px 0 0;transform-origin:bottom;animation:rise .9s backwards}
+.step small{font-size:.4em}.r1 .step{background:var(--w);color:#000;animation-delay:.9s}.r2 .step{animation-delay:.5s}.r3 .step{animation-delay:.1s}
+@keyframes rise{from{transform:scaleY(0)}}
+.ph{display:flex;flex-direction:column;min-height:100dvh;padding:12px;gap:10px;max-width:520px;margin:auto}
+.top{display:flex;align-items:center;gap:10px;background:var(--g);padding:10px;border-radius:12px}
+.mid{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center}
+.kb div{display:flex;gap:5px;margin-bottom:5px}.kb button{flex:1;padding:14px 0;background:var(--g2);min-width:0}
+.form{justify-content:center;align-items:stretch;text-align:center}.form .logo{align-self:center}
+.form input{padding:14px;border-radius:10px;border:2px solid var(--g2);background:var(--g);color:#fff;font-size:1.1em}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}.grid button{padding:8px 0;font-size:1.4em}
+.cols{display:flex;gap:10px;justify-content:center}.col{width:38px;height:38px;border-radius:50%;border:3px solid transparent;padding:0}.col.on{outline:3px solid var(--r)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--w);color:#000;padding:12px 18px;border-radius:10px;z-index:20}
+.shake{animation:sh .4s}@keyframes sh{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:9}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body><div id="app"></div><canvas id="fx"></canvas>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const E='🦊 🐼 🦁 🐯 🐸 🐵 🐙 🦄 🐧 🐶 🐱 🐰 🦉 🐲 🦖 🐢 🦈 🐝 🦅 🐺 🐨 🦔 🦒 🚀'.split(' '),
+  C=['#e10600','#ffffff','#ff6b5e','#9a9a9a','#555555','#ffd1cc'],
+  MD={solo:[1,1,'Solo'],duel:[2,2,'Duel'],duo:[4,4,'Duo VS Duo'],group:[2,20,'Groupe']},
+  IN={s:'Change la lettre rouge pour former un autre mot',t:'Change les 2 lettres rouges pour former un autre mot',a:"Ajoute 1 lettre à l'endroit rouge pour former un mot"};
+const $=s=>document.querySelector(s),app=$('#app'),cx=$('#fx').getContext('2d'),sock=io(),
+  qs=new URLSearchParams(location.search),path=location.pathname;
+let S=null,off=0,role='',ME=null,JOINED=false,INFO={lan:[],port:location.port},seen=new Set(),
+  typed=[],lockT=0,sig='',lastPh='',prof=null,AC,sa=0,sc=0,P=[];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const av=p=>`<i class="av" style="background:${C[p.col]}">${E[p.av]}</i>`;
+const T=(x,c='',s='')=>`<div class="tile ${c}">${x}${s?`<sub>${s}</sub>`:''}</div>`;
+const LOGO='<div class="logo">KURNIWORD <b>RACE</b></div>';
+const P_=id=>S.players.find(p=>p.id===id);
+const base=()=>INFO.pub||(/^(localhost|127\.)/.test(location.hostname)&&INFO.lan[0]?`http://${INFO.lan[0]}:${INFO.port}`:location.origin);
+const loadInfo=async()=>{try{INFO=await(await fetch('/api/info')).json()}catch(e){}};
+function toast(m){const t=document.createElement('div');t.className='toast';t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2200)}
+function cmd(a,v){sock.emit('cmd',{a,v},r=>r&&r.err&&toast(r.err))}
+function beep(n){try{if(!AC)return;const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=n===1?880:440;g.gain.value=.08;o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+.15)}catch(e){}}
+addEventListener('pointerdown',()=>{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume()});
+function boom(n){for(let i=0;i<n;i++)P.push({x:innerWidth/2,y:innerHeight*.65,vx:(Math.random()-.5)*20,vy:-Math.random()*22-4,s:6+Math.random()*8,c:['#e10600','#fff','#ff6b5e','#fff'][i%4]})}
+function tick(){const f=$('#fx');if(f.width!==innerWidth){f.width=innerWidth;f.height=innerHeight}
+  cx.clearRect(0,0,f.width,f.height);P=P.filter(p=>p.y<f.height+30);
+  for(const p of P){p.x+=p.vx;p.y+=p.vy;p.vy+=.5;cx.fillStyle=p.c;cx.fillRect(p.x,p.y,p.s,p.s*.6)}
+  if(S){const t=Date.now()+off;
+    if(S.phase==='countdown'){const e=$('#cd'),n=Math.max(1,Math.ceil((S.startAt-t)/1000));if(e&&e.textContent!=n){e.textContent=n;if(role!=='play')beep(n)}}
+    if(S.phase==='playing'){const l=Math.max(0,S.endAt-t),e=$('#tm'),b=$('#bar');if(e)e.textContent=Math.ceil(l/1000);if(b)b.style.width=l/(S.dur*10)+'%'}}
+  requestAnimationFrame(tick)}
+tick();
+sock.on('state',s=>{S=s;off=s.now-Date.now();render()});
+
+// ---- Tuiles de mots ----
+function play(c,t){const L=[...c.word],p=c.pos,o=[];
+  const slot=(k,x)=>t?T(t[k]||'_','slot',x):T(x||'?','mod');
+  if(c.type==='a'){for(let i=0;i<=L.length;i++){if(i===p[0])o.push(slot(0,''));if(i<L.length)o.push(T(L[i]))}}
+  else L.forEach((x,i)=>{const k=p.indexOf(i);o.push(k<0?T(x):slot(k,x))});
+  return `<div class="tiles">${o.join('')}</div>`}
+const show=(w,hi)=>`<div class="tiles">${[...w].map((x,i)=>T(x,hi.includes(i)?'mod':'')).join('')}</div>`;
+
+// ---- Écran principal (animateur + écran public) ----
+function side(){return(S.teams?`<div class="row">${S.teams.map(t=>`<b class="tt ${t.t}">${t.t==='A'?'Rouge':'Blanc'} ${t.score}</b>`).join('')}</div>`:'')+
+  S.players.map(p=>`<div class="row ${seen.has(p.id)?'':'in'} ${p.on?'':'off'} ${S.mode==='duo'?'t'+p.team:''}" ${role==='host'&&S.phase==='lobby'&&S.mode==='duo'?`onclick="cmd('team','${p.id}')"`:''}>
+  <b>${S.phase==='lobby'?'':p.rank}</b>${av(p)}<span class="nm">${esc(p.name)}</span>${S.phase==='playing'&&p.ans!=null?'✔':''}${S.phase==='result'&&p.gain?`<em>+${p.gain}</em>`:''}<b>${S.phase==='lobby'?'':p.score}</b>
+  ${role==='host'&&S.phase==='lobby'?`<button class="alt sm" onclick="event.stopPropagation();cmd('kick','${p.id}')">✕</button>`:''}</div>`).join('')}
+function board(){const H=role==='host',c=S.ch,ph=S.phase;let m='';
+  const btn=(a,t,x='')=>H?`<button class="${x}" onclick="cmd('${a}')">${t}</button>`:'';
+  if(ph==='lobby'){const url=base()+'/play?code='+S.code,[mn,mx]=MD[S.mode];
+    m=`${LOGO}<div class="hd">Code du salon</div><div class="big code">${S.code}</div><img class="qr" src="/api/qr?t=${encodeURIComponent(url)}" alt="QR code"><div class="url">${url}</div>`+
+    (H?`<div class="ctl">${Object.entries(MD).map(([k,v])=>`<button class="${S.mode===k?'on':'alt'}" onclick="cmd('mode','${k}')">${v[2]}</button>`).join('')}</div>
+    <div class="ctl">${[15,25,40].map(d=>`<button class="${S.dur===d?'on':'alt'}" onclick="cmd('dur',${d})">${d} s / défi</button>`).join('')}<button class="${S.auto?'on':'alt'}" onclick="cmd('auto',${!S.auto})">Enchaînement auto</button></div>
+    <div>${S.players.length} joueur(s) connecté(s) · il en faut ${mn===mx?mn:mn+' à '+mx}${S.mode==='duo'?' · clique un joueur pour changer son équipe':''}</div>
+    <button class="go" onclick="cmd('start')">Lancer la partie</button><div class="url">Écran TV : ${base()}/screen?code=${S.code}</div>`:'<div class="hd">En attente de l\'animateur…</div>')}
+  else if(ph==='ready')m=`${LOGO}<div class="hd">Manche ${S.round}</div><div class="big">Défi ${S.idx+1}<small>/${S.total}</small></div>${btn('launch','▶ Lancer le défi','go')}`;
+  else if(ph==='countdown')m='<div class="hd">Prêts ?</div><div class="big" id="cd">3</div>';
+  else if(ph==='playing')m=`<div class="hd">Manche ${S.round} · défi ${S.idx+1}/${S.total}</div><div class="hd">${IN[c.type]}</div>${play(c,null)}<div class="big" id="tm"></div><div class="bar"><i id="bar"></i></div><div class="chips">${S.players.map(p=>`<span class="${p.ans!=null?'ok':'dim'}">${av(p)}</span>`).join('')}</div>`;
+  else if(ph==='result'){const hi=c.type==='a'?[c.pos[0]]:c.pos,f=S.res.fast;
+    m=`<div class="hd">Réponse possible</div>${show(S.res.sols[0],hi)}<div class="hd">${S.res.sols.length>1?'Aussi : '+S.res.sols.slice(1).join(', '):''}</div>`+
+    (f.length?f.slice(0,5).map(x=>{const p=P_(x.id);return `<div class="row">${av(p)}<span class="nm">${esc(p.name)}</span>${x.w} · ${(x.ms/1000).toFixed(1)} s <em>+${x.gain}</em></div>`}).join(''):'<div class="hd">Personne n\'a trouvé</div>')+
+    btn('next',S.idx>=S.total-1?'Voir le podium':'Défi suivant ▶','go')}
+  else{const w=S.winners[S.winners.length-1];
+    m=`${LOGO}<h2>Manche ${S.round} : ${esc(w?w.name:'')} gagne !</h2><div class="pods">${[1,0,2].map(i=>S.players[i]).filter(Boolean).map(p=>`<div class="pod r${p.rank}" style="--h:${[0,260,190,140][p.rank]}px">${av(p)}<b>${esc(p.name)}</b><div class="step">${p.rank}<small>${p.score} pts</small></div></div>`).join('')}</div>`+
+    (H?`<div class="ctl">${btn('newround','Nouvelle manche (scores à zéro)','go')}${btn('lobby','Retour au salon','alt')}</div>`:'')}
+  return `<div class="board"><div class="main">${m}</div><div class="side"><div class="hd">Classement · manche ${S.round}</div>${side()}</div></div>`}
+
+// ---- Téléphone (manette) ----
+const kb=()=>`<div class="kb">${['AZERTYUIOP','QSDFGHJKLM','WXCVBN<'].map(r=>`<div>${[...r].map(l=>`<button onclick="K('${l}')">${l==='<'?'⌫':l}</button>`).join('')}</div>`).join('')}</div>`;
+function K(l){if(S.phase!=='playing'||Date.now()<lockT)return;const me=P_(ME);if(!me||me.ans!=null)return;
+  const n=S.ch.type==='t'?2:1;
+  if(l==='<'){for(let i=n-1;i>=0;i--)if(typed[i]){typed[i]='';break}}
+  else{const i=[...Array(n).keys()].find(i=>!typed[i]);if(i!==undefined)typed[i]=l}
+  $('#tl').innerHTML=play(S.ch,typed);
+  if([...Array(n).keys()].every(i=>typed[i]))sock.emit('ans',{l:typed.slice(0,n)},r=>{
+    if(r&&r.ok)return;lockT=Date.now()+700;typed=[];const e=$('#tl');if(e){e.innerHTML=play(S.ch,typed);e.classList.add('shake');setTimeout(()=>e.classList.remove('shake'),400)}toast((r&&r.msg)||'Mot inconnu')})}
+function phone(){const me=P_(ME);if(!me)return;
+  const k=[S.phase,S.idx,S.round,me.ans!=null,me.score,me.rank,me.team,S.mode,S.players.length].join();if(k===sig)return;sig=k;
+  if(S.phase!=='playing')typed=[];const c=S.ch,ph=S.phase;let m;
+  const top=`<div class="top">${av(me)}<span class="nm">${esc(me.name)}</span>${S.mode==='duo'?`<b class="tt ${me.team}">${me.team==='A'?'Rouge':'Blanc'}</b>`:''}<b>#${me.rank} · ${me.score} pts</b></div>`;
+  if(ph==='lobby')m=`<div class="hd">Salon ${S.code}<br>En attente de l'animateur…</div>`;
+  else if(ph==='ready')m=`<div class="hd">Défi ${S.idx+1}/${S.total}<br>Prépare-toi !</div>`;
+  else if(ph==='countdown')m='<div class="big sm" id="cd">3</div>';
+  else if(ph==='playing'&&me.ans==null)m=`<div class="hd">${IN[c.type]}</div><div id="tl">${play(c,typed)}</div><div class="big sm" id="tm"></div><div class="bar"><i id="bar"></i></div>`;
+  else if(ph==='playing')m=`<div class="big sm">✔</div><div class="hd">Validé en ${(me.ans/1000).toFixed(1)} s<br>Attends les autres…</div>`;
+  else if(ph==='result')m=`<div class="big sm">${me.ans!=null?'+'+me.gain:'✘'}</div><div class="hd">${me.ans!=null?'Bien joué !':'Raté'} · Réponse : ${S.res.sols[0]}</div>`;
+  else m=`<div class="big sm">#${me.rank}</div><div class="hd">Manche terminée · ${me.score} pts</div>`;
+  app.innerHTML=`<div class="ph">${top}<div class="mid">${m}</div>${ph==='playing'&&me.ans==null?kb():''}</div>`}
+
+function render(){if(!S)return;
+  if(S.phase==='roundEnd'&&lastPh!=='roundEnd')boom(220);lastPh=S.phase;
+  if(role==='play')phone();else{app.innerHTML=board();seen=new Set(S.players.map(p=>p.id))}}
+
+// ---- Démarrage selon la page ----
+const pick=(s,i)=>document.querySelectorAll(s).forEach((b,j)=>b.classList.toggle('on',i===j));
+function joinForm(code,msg){app.innerHTML=`<div class="ph form">${LOGO}<input id="jc" placeholder="Code du salon" maxlength="4" value="${code||''}" autocapitalize="characters"><input id="jn" placeholder="Ton pseudo" maxlength="14"><div class="grid">${E.map((e,i)=>`<button class="alt ava ${i===sa?'on':''}" onclick="sa=${i};pick('.ava',${i})">${e}</button>`).join('')}</div><div class="cols">${C.map((c,i)=>`<button class="col ${i===sc?'on':''}" style="background:${c}" onclick="sc=${i};pick('.col',${i})"></button>`).join('')}</div><button class="go" onclick="go()">Rejoindre</button></div>`;if(msg)toast(msg)}
+function go(){const c=$('#jc').value.trim().toUpperCase(),n=$('#jn').value.trim();if(c.length!==4||!n)return toast('Code et pseudo requis');
+  prof={code:c,name:n,av:sa,col:sc,pid:prof&&prof.code===c?prof.pid:undefined};doJoin()}
+function doJoin(){sock.emit('join',prof,r=>{
+  if(r.err){const c=prof&&prof.code;if(!JOINED){delete localStorage.kw;prof=null;joinForm(c,r.err)}else toast(r.err);return}
+  ME=r.pid;prof.pid=ME;JOINED=true;localStorage.kw=JSON.stringify(prof);sig='';
+  try{navigator.wakeLock&&navigator.wakeLock.request('screen').catch(()=>{})}catch(e){}if(S)render()})}
+async function init(){
+  if(path==='/host'){role='host';await loadInfo();
+    sock.on('connect',()=>{let sv=null;try{sv=JSON.parse(localStorage.kwh)}catch(e){}
+      const mk=()=>sock.emit('create',r=>{localStorage.kwh=JSON.stringify(r)});
+      sv?sock.emit('resume',sv,r=>{if(r.err)mk()}):mk()})}
+  else if(path==='/screen'){role='screen';await loadInfo();
+    sock.on('connect',()=>sock.emit('watch',{code:qs.get('code')},r=>{if(r.err)app.innerHTML=`<div class="ph"><div class="mid"><div class="hd">${r.err}</div></div></div>`}))}
+  else if(path==='/play'){role='play';const code=(qs.get('code')||'').toUpperCase();
+    try{prof=JSON.parse(localStorage.kw)}catch(e){}
+    const auto=prof&&(!code||prof.code===code);if(!auto)joinForm(code);
+    sock.on('connect',()=>{if(JOINED||auto)doJoin()});
+    sock.on('kicked',()=>{delete localStorage.kw;JOINED=false;ME=null;prof=null;S=null;joinForm('','Tu as été retiré du salon')})}
+  else app.innerHTML=`<div class="ph"><div class="mid">${LOGO}<a href="/host"><button class="go">Créer un salon (écran principal)</button></a><a href="/play"><button class="alt">Rejoindre avec mon téléphone</button></a></div></div>`}
+init();
+</script></body></html>

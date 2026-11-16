@@ -1,0 +1,14 @@
+{
+  "name": "kurniword-race",
+  "version": "1.0.0",
+  "description": "KURNIWORD RACE - jeu de mots multijoueur : écran maître + téléphones manettes",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "an-array-of-french-words": "^2.0.0",
+    "express": "^4.19.2",
+    "qrcode": "^1.5.3",
+    "socket.io": "^4.7.5"
+  }
+}
